@@ -3,11 +3,15 @@ import  'bulma/css/bulma.css'
 import {Card} from 'react-bootstrap'
 import { Button } from 'react-bootstrap'
 import { NavLink } from 'react-router-dom'
+import { connect } from 'react-redux'
+import {removeFave} from '../redux/action'
 
 
 
-const listingCard = (props)=>{
+const favoriteCard = (props)=>{
 // console.log(props, 'here')
+
+
     return(
         <>
 
@@ -28,16 +32,23 @@ const listingCard = (props)=>{
             <Button type="button" className="btn btn-dark btn-sm mr-1 mb-2"><NavLink to={`/listings/${props.land.id}`} exact className="link"><i className="fas fa-info-circle pr-2 "></i>see more</NavLink></Button>
 
         {/* <Button type="button" className="btn btn-dark btn-sm mr-1 mb-2">❤️</Button> */}
-        {console.log("LOOK", props)}
+       
+    
 
-   
+   <Button onClick={()=> props.removeFave(parseInt(props.favoriteId))}>X</Button>
+
+
 
   </Card.Body>
 
-    <h6>{props.favoriteId}</h6>
  </Card> 
         </>
     )
 }
 
-export default listingCard
+const mdp = (dispatch)=>{
+
+    return {removeFave: (id)=> dispatch(removeFave(id))}
+}
+
+export default connect(null,mdp)(favoriteCard)

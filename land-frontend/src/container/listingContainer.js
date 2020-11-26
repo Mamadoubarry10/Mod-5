@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import ListingCard from '../component/listingCard'
+import{CardColumns} from 'react-bootstrap'
 
 
 
@@ -16,7 +17,10 @@ import ListingCard from '../component/listingCard'
        
         <div>
             <h1 className="list-h1">All Listings</h1>
-        {this.renderListing()}
+            <CardColumns>
+            {this.renderListing()}
+            </CardColumns>
+        
         {console.log("loooooooo", this.props.properties)}
         </div>
      )

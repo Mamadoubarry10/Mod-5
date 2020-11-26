@@ -1,6 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import ListingCard from '../component/listingCard'
+import FavoritesCard from '../component/favoritesCard'
+import{CardColumns} from 'react-bootstrap'
+
 
 
 
@@ -9,7 +11,10 @@ import ListingCard from '../component/listingCard'
     
 
      renderListing = () => { 
-         return this.props.favorite.map(land => <ListingCard  key={land.id} land={land}/>)
+        if (this.props.favorite.length > 0)
+         return this.props.favorite.map(land => <FavoritesCard   land={land[0]} favoriteId={land[1]}/>)
+         else 
+         return null
         }
 
 
@@ -19,8 +24,14 @@ import ListingCard from '../component/listingCard'
       
         <div>
             <h1 className="list-h1">My favorites</h1>
-        {this.renderListing()}
-        {console.log('lol',  this.props.favorite)}
+        <CardColumns>
+        {
+        this.renderListing()}
+
+        </CardColumns>
+     
+        {console.log("faves props", this.props.favorite)}
+        <h1>hwy</h1>
         
         </div>
 
@@ -32,7 +43,7 @@ import ListingCard from '../component/listingCard'
 }
 const msp = (state)=>{
 
-return { favorite: state.favorites}
+return { favorite: state.favorites, favorite_id: state.favorite_id}
 }
 
 

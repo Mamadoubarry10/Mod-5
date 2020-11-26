@@ -9,12 +9,16 @@ import Navbar from './component/navbar'
 import Signup from './component/signup'
 import ListingConatiner from './container/listingContainer'
 import FavoritesContainer from './container/favoritesContainer'
+import ProfileContainer from './container/profileContainer'
 import {Route, Switch} from "react-router-dom";
 import Landshow from './component/landshow'
 
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
-import 'bulma/css/bulma.css'
+
+
+// import 'bulma/css/bulma.css'
 
 
 
@@ -24,7 +28,7 @@ class App extends React.Component{
 
   componentDidMount(){
    this.props.fetchProperties()
-   
+
   }
   
   render(){
@@ -32,7 +36,8 @@ class App extends React.Component{
 
     return (
       <div className="App">
-       <Navbar/>
+        
+       {this.props.user? <><Navbar/></>: null}
        <Switch>
 
        <Route path="/listings/:id"  render={(routerProps) => {
@@ -52,16 +57,28 @@ class App extends React.Component{
                       
                   </>)
               }} />
-       <Route path= "/login" render={()=><Login/>} />
+       
+       {this.props.user ? <> <Route path= "/listings" render={()=><ListingConatiner/>} />
        <Route path= "/list" render={()=><List/>} />
-       <Route path= "/listings" render={()=><ListingConatiner/>} />
        <Route path= "/favorites" render={()=><FavoritesContainer/>} />
+       <Route path= "/profile" render={()=><ProfileContainer/>} />
+       <Route path= "/" render={()=> null} />
+       
+       </>: <> <Route path= "/" render={()=><Login/>} />
        <Route path= "/signup" render={()=><Signup/>} />
+       </>}
+       
+       
+       {/* <Route path= "/login" render={()=><Login/>} />
+       <Route path= "/listings" render={()=><ListingConatiner/>} />
+       <Route path= "/list" render={()=><List/>} />
+       <Route path= "/favorites" render={()=><FavoritesContainer/>} />
+       <Route path= "/signup" render={()=><Signup/>} /> */}
 
 
 
        </Switch>
-      
+      {console.log("ghh", this.props.user)}
       </div>
     );
   }
@@ -74,7 +91,7 @@ return{fetchProperties: () => dispatch(fetchPropeties())}
 
 const msp = (state)=>{
 
-  return { properties: state.properties}
+  return { properties: state.properties, user: state.user}
 }
 
 export default connect(msp, mdp)(App);

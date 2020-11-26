@@ -34,7 +34,7 @@ const landShow = (props)=>{
                 {console.log("ROOOOOOOOOOOOOOO", props.user, 'YXXXXXXXX',props.product.id)}
                 <button type="button" className="btn-dark" onClick={()=>props.addToFavorites(props.user.id, props.product )}>Add to favorites</button>
                 
-
+   {console.log("here", props.user.id, props.product)}
         </div>
         
         

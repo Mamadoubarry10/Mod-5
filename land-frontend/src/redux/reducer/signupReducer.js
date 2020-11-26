@@ -1,6 +1,7 @@
 
 const defaultState ={
-    user:[]
+    user:false
+    
 }
 
 function signupReducer(state = defaultState.user, action){

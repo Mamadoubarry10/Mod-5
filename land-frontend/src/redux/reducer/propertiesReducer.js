@@ -10,7 +10,7 @@ function propertiesReducer(state = defaultState.properties, action){
             return action.payload;
             break;
         case "ADD_PROPERTY":
-            return action.payload;
+            return [...state, action.payload];
         default:
             return state
             break;

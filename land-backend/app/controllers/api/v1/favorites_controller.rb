@@ -18,6 +18,13 @@ class Api::V1::FavoritesController < ApplicationController
         json_string = FavoriteSerializer.new(favorite).serializable_hash
         render json: json_string
     end
+    
+    def destroy
+        favorite=Favorite.find(params[:id])
+        favorite.destroy
+        json_string = FavoriteSerializer.new(favorite).serializable_hash
+        render json: json_string
+    end
 
     private
     def favorite_params
