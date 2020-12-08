@@ -24,14 +24,14 @@ import{CardColumns} from 'react-bootstrap'
       
         <div>
             <h1 className="list-h1">My favorites</h1>
-        <CardColumns>
+        <CardColumns style={{textAlign: "center"}}>
         {
         this.renderListing()}
 
         </CardColumns>
      
         {console.log("faves props", this.props.favorite)}
-        <h1>hwy</h1>
+    
         
         </div>
 

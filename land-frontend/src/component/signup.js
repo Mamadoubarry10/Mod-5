@@ -26,8 +26,27 @@ class Signup extends React.Component{
     localSubmithandler= (e)=>{
         e.preventDefault()
         this.props.submitHandler(this.state)
-
     }
+
+    uploadImage = async e => {
+        const files = e.target.files
+        const data = new FormData()
+        data.append('file', files[0])
+        data.append('upload_preset', 'mamadou')
+     
+        const res = await fetch(
+          '	https://api.cloudinary.com/v1_1/dchooagl5/image/upload' ,
+          {
+            method: 'POST',
+            body: data
+          }
+        )
+        const file = await res.json()
+    
+       console.log(file)
+        this.setState({userImg:file.secure_url})
+   
+      }
     render(){
         return(
             <div>
@@ -38,7 +57,7 @@ class Signup extends React.Component{
                  <input className="pass" type="text" name ="username"  value={this.state.username} onChange={e => this.changeHandler(e)} align="center" placeholder="username"/>
                  <input className="pass " type="email" name="email" value={this.state.email} onChange={e => this.changeHandler(e)} align="center" placeholder="email"/>
                  <input className="pass" type="password" name="password" value={this.state.password} onChange={e => this.changeHandler(e)} align="center" placeholder="password"/>
-                 <input className="un" type="text" name="userImg" value={this.state.userImg} onChange={e => this.changeHandler(e)} align="center" placeholder="photo"/>
+                 <input className="un" type="file" name="userImg" onChange={e => this.uploadImage(e)} align="center" placeholder="photo"/>
                  <input className="un" type="tel" name ="phone" value={this.state.phone} onChange={e => this.changeHandler(e)} align="center" placeholder="phone"/>
                  <input className="un" type="text" name="location" value={this.state.location} onChange={e => this.changeHandler(e)} align="center" placeholder="location"/>
                  <input className="button" type="submit" value="Submit" />

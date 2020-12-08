@@ -6,25 +6,55 @@ import { connect } from 'react-redux'
 
 import  'bulma/css/bulma.css'
 
-const navbar = () =>{
+const navbar = (props) =>{
 
     return(
-        <div>
+        
+        <Navbar bg="dark" expand="lg" sticky="top">
+        <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="mr-auto">
+               
+     <NavLink to="/" exact className="nav-link" style={{
+    fontWeight: "bold",
+    color: "white"
+  }}>Home</NavLink>
+      <NavLink to="/listings" exact className="nav-link"  style={{
+    fontWeight: "bold",
+    color: "white"
+  }}>Listings</NavLink>
+      <NavLink to="/favorites" exact className="nav-link"  style={{
+    fontWeight: "bold",
+    color: "white"
+  }}>Favorites</NavLink>
+      <NavLink to="/list" exact className="nav-link"  style={{
+    fontWeight: "bold",
+    color: "white"
+  }}>Sell</NavLink>
+      <NavLink to="/profile" exact className="nav-link"  style={{
+    fontWeight: "bold",
+    color: "white"
+  }}>Profile</NavLink>  
+         
+            </Nav>
             
-
-     <NavLink to="/list" exact className="nav-link">list</NavLink>
-      <NavLink to="/listings" exact className="nav-link">listings</NavLink>
-      <NavLink to="/favorites" exact className="nav-link">favorites</NavLink>
-      <NavLink to="/profile" exact className="nav-link">profile</NavLink>
-
-
-        </div>
-       
+           <Nav>
+    <p onClick={props.logOut} className="nav-link" style={{
+    fontWeight: "bold",
+    color: "white",
+    cursor:"pointer",
+    display:"inline"
+    
+  }}>Log Out</p>   
+  </Nav>      
+        </Navbar.Collapse>
+    </Navbar>
+        
+  
     )
 }
-const msp = (state)=>{
+const mdp = (dispatch)=>{
 
-    return { user: state.user}
+    return { logOut:()=> dispatch({type: "LOG_OUT"})}
 }
 
-export default connect(msp)(navbar)
+export default connect(null,mdp)(navbar)

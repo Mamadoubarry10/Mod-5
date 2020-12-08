@@ -7,7 +7,7 @@ import { NavLink } from 'react-router-dom'
 
 
 const listingCard = (props)=>{
-// console.log(props, 'here')
+console.log(props, 'hereeeeee')
     return(
         <>
 
@@ -15,7 +15,7 @@ const listingCard = (props)=>{
     <div className="view zoom overlay">
     <a href="#!">
         <div className="mask">
-            <Card.Img variant="top" src={props.land.img1} className="img-fluid w-100" />
+            <Card.Img variant="top" src={props.land.attributes.img2} className="img-fluid w-100" />
             <div class="mask rgba-black-slight"></div>
         </div>
     </a>
@@ -23,9 +23,9 @@ const listingCard = (props)=>{
     </div>
     <Card.Body style={{textAlign: "center"}}>
     <Card.Title >{props.land.location}</Card.Title>
-            <h6 className="mb-2"><span>${props.land.price}</span></h6>
+            <h6 className="mb-2">Price: <span>${props.land.attributes.price}</span></h6>
             
-            <Button type="button" className="btn btn-dark btn-sm mr-1 mb-2"><NavLink to={`/listings/${props.land.id}`} exact className="link"><i className="fas fa-info-circle pr-2 "></i>see more</NavLink></Button>
+            <Button type="button" className="btn btn-dark "><NavLink to={`/listings/${props.land.attributes.id}`} exact className="link"><i className="fas fa-info-circle pr-2 "></i>see more</NavLink></Button>
 
         {/* <Button type="button" className="btn btn-dark btn-sm mr-1 mb-2">❤️</Button> */}
         {console.log("LOOK", props)}

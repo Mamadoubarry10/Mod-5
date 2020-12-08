@@ -12,6 +12,7 @@ import FavoritesContainer from './container/favoritesContainer'
 import ProfileContainer from './container/profileContainer'
 import {Route, Switch} from "react-router-dom";
 import Landshow from './component/landshow'
+import Homepage from './component/home'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -38,46 +39,45 @@ class App extends React.Component{
       <div className="App">
         
        {this.props.user? <><Navbar/></>: null}
-       <Switch>
-
+       
+{this.props.user ?
+  <Switch>
        <Route path="/listings/:id"  render={(routerProps) => {
                 let id = parseInt(routerProps.match.params.id)
                 let product
 
                 if (this.props.properties.length > 0) {
-                  product = this.props.properties.find(el => el.id === id
+                  product = this.props.properties.find(el => parseInt(el.id) === id
                   )
                 
                 }
                 
                 return (
                   <>
-                    {this.props.properties.length ? <Landshow product={product}  />
+                  {console.log('hereeeee', product)}
+                    {this.props.properties.length ? <Landshow product={product.attributes}  />
                       : <h1>Loading</h1>}  
                       
                   </>)
               }} />
        
-       {this.props.user ? <> <Route path= "/listings" render={()=><ListingConatiner/>} />
+         <Route path= "/listings" render={()=><ListingConatiner/>} />
        <Route path= "/list" render={()=><List/>} />
        <Route path= "/favorites" render={()=><FavoritesContainer/>} />
        <Route path= "/profile" render={()=><ProfileContainer/>} />
-       <Route path= "/" render={()=> null} />
-       
-       </>: <> <Route path= "/" render={()=><Login/>} />
-       <Route path= "/signup" render={()=><Signup/>} />
-       </>}
-       
-       
-       {/* <Route path= "/login" render={()=><Login/>} />
-       <Route path= "/listings" render={()=><ListingConatiner/>} />
-       <Route path= "/list" render={()=><List/>} />
-       <Route path= "/favorites" render={()=><FavoritesContainer/>} />
-       <Route path= "/signup" render={()=><Signup/>} /> */}
-
-
-
+       <Route path= "/" render={()=> <Homepage/>} />
        </Switch>
+       :<Switch>
+       <><Route path= "/signup" exact render={()=><Signup/>} />
+        <Route path= "/" exact render={()=><Login/>} />
+       </> </Switch>
+       
+       
+    
+
+      }
+
+       
       {console.log("ghh", this.props.user)}
       </div>
     );

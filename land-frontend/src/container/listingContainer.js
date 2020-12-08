@@ -13,15 +13,16 @@ import{CardColumns} from 'react-bootstrap'
 
 
      render(){
+        console.log("look", this.props.properties.find(el => el.id === '4') )
         return (
-       
+          
         <div>
             <h1 className="list-h1">All Listings</h1>
-            <CardColumns>
+            <CardColumns style={{textAlign: "center"}}>
             {this.renderListing()}
             </CardColumns>
         
-        {console.log("loooooooo", this.props.properties)}
+     
         </div>
      )
 

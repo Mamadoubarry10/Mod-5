@@ -10,6 +10,8 @@ function signupReducer(state = defaultState.user, action){
             console.log("fetching", action)
             console.log("action",action.payload)
             return action.payload
+        case "LOG_OUT":
+            return false
         default:
             return state
         

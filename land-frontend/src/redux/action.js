@@ -3,7 +3,8 @@ export function fetchPropeties(){
 
         fetch('http://localhost:3000/api/v1/listings/')
         .then(resp =>resp.json())
-        .then(properties => dispatch({type: "FETCH_PROPERTIES", payload:properties }))
+        .then(properties => dispatch({type: "FETCH_PROPERTIES", payload:properties.data },   console.log("here", properties))
+        )
 
     };
 }
@@ -22,7 +23,7 @@ export function postPropeties(obj, User){
             body: JSON.stringify({img1:obj.image1, img2:obj.image2, img3:obj.image3, price:obj.price, acres:obj.acres, location:obj.location, description:obj.description, user_id:User})
         })
             .then(r => r.json())
-            .then(property => {dispatch({type: "ADD_PROPERTY",  payload: property})
+            .then(property => {dispatch({type: "ADD_PROPERTY",  payload: property.data})
             console.log("LOOK", property)
         })
 
@@ -35,6 +36,7 @@ export function postPropeties(obj, User){
 
 
 export function fetchSignUp(newUser){
+  console.log(newUser, 'objjjjj')
     return function(dispatch){
         fetch('http://localhost:3000/api/v1/users', {
             method: 'POST',
@@ -48,7 +50,7 @@ export function fetchSignUp(newUser){
           })
             .then(r => r.json())
             .then(user => {dispatch({type: "ADD_USER",  payload: user.user.data.attributes})
-            console.log("loook", user.jwt)
+            console.log("loook", user)
             localStorage.setItem("token", user.jwt)
             localStorage.setItem("user", "user")
         })
@@ -114,8 +116,25 @@ export const userLoginFetch = user => {
         console.log("loook", user.jwt)
         localStorage.setItem("token", user.jwt)
         localStorage.setItem("user", "user")
-    })
+    }).catch(res =>{dispatch({type:"ERROR", payload: res})})
 
 };
 }
+
+export const listAsSold = id => {
+  return function (dispatch){
+    return fetch(`http://localhost:3000/api/v1/listings/${id}`, {
+      method: "PATCH",
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+      body: JSON.stringify({price: "Sold"})
+    })
+      .then(resp => resp.json())
+      .then(prop =>{dispatch({type:"UPDATE_PROPERTY", payload: prop.data})})
+
+};
+}
+
 

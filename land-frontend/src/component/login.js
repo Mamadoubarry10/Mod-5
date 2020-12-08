@@ -36,6 +36,8 @@ class Login extends React.Component{
                 <input className="button" type="submit" value="Submit" />
                 
                 </form>
+                {this.props.error ? <h5 style={{ color: "red", textAlign: "center" }}>Incorrect username or password</h5> : null}
+
                 <p style={{textAlign:"center"}}>Don't have an account? <NavLink to={`/signup`} exact className="signUp-link">Sign Up</NavLink></p>
 
       
@@ -52,5 +54,9 @@ function mdp(dispatch){
     return {submitHandler: (newUser)=>dispatch(userLoginFetch(newUser))}
 }
 
-export default connect(null, mdp)(Login)
+function msp(state){
+    return {error : state.error}
+}
+
+export default connect(msp, mdp)(Login)
 

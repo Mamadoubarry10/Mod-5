@@ -3,9 +3,6 @@ class UserSerializer
   attributes :id, :name, :username, :email, :userImg, :phone, :location 
   # has_many :favorites_listings
     
-  attribute :listings do |object|
-      object.listings.as_json
-  end
 
     attribute :favorites do |object|
       object.favorites.as_json

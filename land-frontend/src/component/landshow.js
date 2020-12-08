@@ -1,4 +1,4 @@
-import react from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import {Container} from 'react-bootstrap'
 import {fetchToFavorites} from '../redux/action'
@@ -12,7 +12,7 @@ const landShow = (props)=>{
     // }
     return(
         <>
-    <h1 className="list-h1"> show page</h1>
+
         <div className="land">
                 <div className="row-image">
                 <div className="column">
@@ -26,15 +26,20 @@ const landShow = (props)=>{
                 </div>
                 </div>
                 <div style={{textAlign: "center"}}>
-                <h4>location: {props.product.location}</h4>
-                 <h4>acres: {props.product.acres}</h4>
-               <p >property info: {props.product.description }</p>
-                                <h4>price: ${props.product.price}</h4>
-                </div>
-                {console.log("ROOOOOOOOOOOOOOO", props.user, 'YXXXXXXXX',props.product.id)}
-                <button type="button" className="btn-dark" onClick={()=>props.addToFavorites(props.user.id, props.product )}>Add to favorites</button>
                 
-   {console.log("here", props.user.id, props.product)}
+                <h3 style={{textAlign: "center"}}>Price: ${props.product.price}</h3>
+                <h4>Acres: {props.product.acres}</h4>
+                <h5>Location: {props.product.location}</h5>
+               <p ><b>Property info:</b> {props.product.description }</p>
+               <p ><b>Property Owner:</b> {props.product.user.name }</p>
+                               
+                                </div>
+    <p style={{textAlign: "center"}}><b>interested? call me { props.product.user.phone} or send email <a href = {"mailto:" + props.product.user.email} >{ props.product.user.email}</a></b></p>
+              
+           
+              <button type="button" className="btn-success" onClick={()=>props.addToFavorites(props.user.id, props.product )}>Add to favorites</button>
+              
+   
         </div>
         
         

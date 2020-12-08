@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import Profile from '../component/profile'
-import ListingCard from '../component/listingCard'
+import ProfileRender from './ProfileRender'
+
 import UserListing from './userListing'
 
 
@@ -15,9 +15,9 @@ import UserListing from './userListing'
         return (
        
         <div>
-               <Profile/>
-
-              
+               <ProfileRender/>
+               <h1 className="list-h1">My Listings</h1>
+               <UserListing/>
 
             
             
